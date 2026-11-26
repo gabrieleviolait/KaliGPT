@@ -66,7 +66,7 @@ mkdir -p "$INSTALL_DIR"
 # ----- KaliGPT v1.3 (HackerX) Source Cloning -----
 echo ""
 start_spinner "Cloning KaliGPT repository"
-git clone https://github.com/SudoHopeX/KaliGPT.git "$INSTALL_DIR/" > /dev/null 2>&1
+git clone --branch hackerx https://github.com/gabrieleviolait/KaliGPT.git "$INSTALL_DIR/" > /dev/null 2>&1
 stop_spinner "KaliGPT repository clone"
 
 # ----- Creating OpenSearchAPI Install Dir & Cloning OpenSearchAPI source -----
