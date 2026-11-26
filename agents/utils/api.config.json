@@ -66,5 +66,12 @@
             "nvidia/nemotron-3-ultra-550b-a55b:free",
             "nvidia/nemotron-3.5-lightning:free"
         ]
+    },
+    "litellm": {
+        "api_key": "",
+        "default_model": "groq/openai/gpt-oss-20b",
+        "models": [
+            "groq/openai/gpt-oss-20b"
+        ]
     }
 }
