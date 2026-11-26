@@ -18,6 +18,11 @@ def _load_config() -> Dict[str, Any]:
     default_data = {
         "default_model": "gemini-3.8-flash",
         "default_provider": "gemini",
+        "litellm": {
+            "api_key": "",
+            "default_model": "groq/openai/gpt-oss-20b",
+            "models": ["groq/openai/gpt-oss-20b"]
+        },
         "gemini": {
             "api_key": "YOUR_API_KEY",
             "default_model": "gemini-3.8-flash",
