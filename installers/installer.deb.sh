@@ -1,6 +1,6 @@
 # !/bin/bash
 trap "kill $SPIN_PID 2>/dev/null" EXIT
-USER_NAME=$(logname 2>/dev/null)
+USER_NAME=${SUDO_USER:-$(logname 2>/dev/null)}
 
 # KaliGPT v1.3 Setup (check & install dependencies, create launcher) Script for Debian-based Systems
 # by SudoHopeX ( https://github.com/SudoHopeX )
@@ -74,7 +74,12 @@ mkdir -p /opt/KaliGPT/
 # ----- KaliGPT v1.3 (HackerX) Source Cloning -----
 echo ""
 start_spinner "Cloning KaliGPT repository"
-git clone https://github.com/SudoHopeX/KaliGPT.git /opt/KaliGPT/ > /dev/null 2>&1
+if [ ! -d /opt/KaliGPT/.git ]; then
+    if ! git clone --branch hackerx https://github.com/gabrieleviolait/KaliGPT.git /opt/KaliGPT/; then
+        stop_spinner "KaliGPT repository clone failed"
+        exit 1
+    fi
+fi
 stop_spinner "KaliGPT Repository Clone"
 
 # ----- Creating OpenSearchAPI Install Dir & Cloning OpenSearchAPI source -----
@@ -180,7 +185,7 @@ case "$MODE" in
 
         -ll|--litellm)
                 st_opensearchapi
-                python3 -m agents.litellm "$@"
+                python3 -m agents.litellm_provider "$@"
                 ;;
 
         --web)
@@ -312,7 +317,7 @@ chmod +x /usr/local/bin/opensearchapi
 
 # ----- Change ownership of /opt/KaliGPT/ from root to the actual user who ran sudo -----
 chown -R "$USER_NAME":"$USER_NAME" /opt/KaliGPT/
-chmod 666 /opt/KaliGPT/agents/utils/api.config.json
+chmod 600 /opt/KaliGPT/agents/utils/api.config.json
 
 # ----- Final Message -----
 echo -e "\e[1;32mKaliGPT v1.3 (HackerX) installed Successfully!\e[0m"
