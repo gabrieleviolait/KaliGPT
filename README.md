@@ -66,13 +66,28 @@
 
 1. Download KaliGPT Installer
     ```
-    curl -sL https://raw.githubusercontent.com/SudoHopeX/KaliGPT/refs/heads/hackerx/install.sh | bash
+    curl -fsSL https://raw.githubusercontent.com/gabrieleviolait/KaliGPT/refs/heads/hackerx/install.sh -o install-kaligpt.sh
+    bash install-kaligpt.sh
     ```
     > Note: Use within permitted directory without root user
 2. Install KaliGPT ( don't use sudo in Termux )
    ```
    sudo bash kaligptinstaller.sh
    ```
+
+### Kali Linux / Debian: LiteLLM with Groq
+
+This fork includes the LiteLLM launcher fix and the default model `groq/openai/gpt-oss-20b`.
+For this provider, skip the optional Ollama and built-in API-key setup prompts if they are not needed. Keep your Groq API key in the `GROQ_API_KEY` environment variable rather than committing it to the repository or putting it in the JSON file.
+
+```bash
+read -rs "GROQ_API_KEY?Groq API key: "
+export GROQ_API_KEY
+printf '\\n'
+kaligpt --litellm
+```
+
+The key prompt above uses the default Kali Zsh shell. In Bash use `read -rsp "Groq API key: " GROQ_API_KEY` instead. The environment variable lasts for the current terminal session. The default provider for other launch modes is unchanged. Use only in authorized lab environments.
 
 ## KaliGPT Usages
 use command `kaligpt -h` to see below usages after installation
