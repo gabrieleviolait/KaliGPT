@@ -77,7 +77,7 @@ fi
 mkdir -p /opt/KaliGPT/
 echo ""
 start_spinner "Cloning KaliGPT repository"
-git clone https://github.com/SudoHopeX/KaliGPT.git /opt/KaliGPT/ > /dev/null 2>&1
+git clone --branch hackerx https://github.com/gabrieleviolait/KaliGPT.git /opt/KaliGPT/ > /dev/null 2>&1
 stop_spinner "KaliGPT Repository Clone"
 
 # ---- Clone OpenSearchAPI ----
@@ -146,7 +146,7 @@ case "$MODE" in
   -o|--ollama)     st_opensearchapi; python3 -m agents.ollama "$@" ;;
   -or|--openrouter) st_opensearchapi; python3 -m agents.openrouter "$@" ;;
   -c|--chatgpt)    st_opensearchapi; python3 -m agents.chatgpt "$@" ;;
-  -ll|--litellm)   st_opensearchapi; python3 -m agents.litellm "$@" ;;
+  -ll|--litellm)   st_opensearchapi; python3 -m agents.litellm_provider "$@" ;;
   --web)           python3 -m agents.web_launcher "$@" ;;
   --setup-keys)    python3 -m agents "$MODE" ;;
   -u|--update)
@@ -204,7 +204,7 @@ chmod +x /usr/local/bin/opensearchapi
 
 # ---- Fix ownership ----
 chown -R "$USER_NAME":"$USER_NAME" /opt/KaliGPT/
-chmod 666 /opt/KaliGPT/agents/utils/api.config.json
+chmod 600 /opt/KaliGPT/agents/utils/api.config.json
 
 # ---- Done ----
 echo -e "\e[1;32mKaliGPT v1.3 (HackerX) installed successfully on Arch/Garuda!\e[0m"
